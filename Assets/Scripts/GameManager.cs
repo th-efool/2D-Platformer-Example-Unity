@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
 
 
-        levelCompleteCoins.text = "COINS COLLECTED: "+ coinCount.ToString() +" / " + totalCoins.ToString();
+        levelCompleteCoins.text = "MEAT COLLECTED: "+ coinCount.ToString() +" / " + totalCoins.ToString();
  
     }
    

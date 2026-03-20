@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Events : MonoBehaviour
 {
+    [SerializeField] private int SceneIndex;
     public void Menu()
     {
         SceneManager.LoadScene(0);
@@ -12,6 +13,15 @@ public class Events : MonoBehaviour
     public void Level()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene((SceneIndex+1)%4);
+    }
+    public void LoadLevelIndex(int i)
+    {
+        SceneManager.LoadScene(i);
     }
     public void Quit()
     {
