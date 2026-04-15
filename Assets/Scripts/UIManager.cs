@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
     public bool fadeToBlack, fadeFromBlack;
     public Image blackScreen;
-    public float fadeSpeed = 2f;
+    public float fadeSpeed = 22f;
 
     //player reference
 
@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
     private void FadeScreen(float targetAlpha)
     {
         Color currentColor = blackScreen.color;
-        float newAlpha = Mathf.MoveTowards(currentColor.a, targetAlpha, fadeSpeed * Time.deltaTime);
+        float newAlpha = Mathf.MoveTowards(currentColor.a, targetAlpha, fadeSpeed*10.0f * Time.deltaTime);
         blackScreen.color = new Color(currentColor.r, currentColor.g, currentColor.b, newAlpha);
     }
 }

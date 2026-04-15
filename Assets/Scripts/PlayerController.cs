@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
             footEmissions.rateOverTime = 0f;
         }
 
-        playeranim.SetBool("isGrounded", isGroundedBool);
+       // playeranim.SetBool("isGrounded", isGroundedBool);
        
     }
 
