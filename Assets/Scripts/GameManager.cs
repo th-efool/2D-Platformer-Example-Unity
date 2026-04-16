@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     public void FindTotalPickups()
     {
 
-        pickup[] pickups = GameObject.FindObjectsOfType<pickup>();
+        pickup[] pickups = GameObject.FindObjectsByType<pickup>();
 
         foreach (pickup pickupObject in pickups)
         {
@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
     {
        
 
+        playerController.gameObject.SetActive(false);
 
         levelCompletePanel.SetActive(true);
         leveCompletePanelTitle.text = "LEVEL COMPLETE";
@@ -129,7 +130,7 @@ public class GameManager : MonoBehaviour
         // Check if the game is still over (in case player respawns earlier)
         if (isGameOver)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
 
             
         }

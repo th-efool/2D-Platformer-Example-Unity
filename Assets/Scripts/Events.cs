@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Events : MonoBehaviour
 {
-    [SerializeField] private int SceneIndex;
+    [SerializeField] public int SceneIndex;
     public void Menu()
     {
         SceneManager.LoadScene(0);

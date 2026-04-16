@@ -9,7 +9,7 @@ public enum Controls { mobile,pc}
 public class PlayerController : MonoBehaviour
 {
 
-
+    public GameObject PauseScreen;
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public float doubleJumpForce = 8f;
@@ -62,11 +62,17 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused; // toggle pause
+            PauseScreen.SetActive(isPaused);
+            
+        }
         isGroundedBool = IsGrounded();
 
         if (isGroundedBool)
         {
-            canDoubleJump = true; // Reset double jump when grounded
+            canDoubleJump = false; // Reset double jump when grounded
 
             if (controlmode == Controls.pc)
             {
