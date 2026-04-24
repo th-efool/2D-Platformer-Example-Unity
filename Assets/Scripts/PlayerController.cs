@@ -67,6 +67,21 @@ public class PlayerController : MonoBehaviour
             isPaused = !isPaused; // toggle pause
             PauseScreen.SetActive(isPaused);
             
+            if (isPaused)
+            {
+                Time.timeScale = 0f; // pause game loop
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Time.timeScale = 1f; // resume game
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            
         }
         isGroundedBool = IsGrounded();
 
