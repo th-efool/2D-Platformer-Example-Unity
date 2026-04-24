@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
 {
     public AudioSource jumpAudio;
     public GameObject PauseScreen;
+    public GameObject gameOverScreen;
+
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public float doubleJumpForce = 8f;
     public LayerMask groundLayer;
     public Transform groundCheck;
-
     private Rigidbody2D rb;
     private bool isGroundedBool = false;
     private bool canDoubleJump = false;
@@ -214,6 +215,9 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "killzone")
         {
+            gameOverScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             GameManager.instance.Death();
         }
     }
