@@ -4,39 +4,50 @@ using UnityEngine;
 
 public class pickup : MonoBehaviour
 {
-    public enum pickupType { coin,gem,health}
+    public enum pickupType { coin, gem, health }
 
     public pickupType pt;
     [SerializeField] GameObject PickupEffect;
 
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        // auto-detect AudioSource on same prefab
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(pt == pickupType.coin)
-        {
-            if(collision.gameObject.tag == "Player")
-            {
-                GameManager.instance.IncrementCoinCount();
-           
-                Instantiate(PickupEffect, transform.position, Quaternion.identity);
+        if (!collision.CompareTag("Player")) return;
 
-                Destroy(this.gameObject,0.2f);
-                
-            }
-            
+        if (pt == pickupType.coin)
+        {
+            GameManager.instance.IncrementCoinCount();
+        }
+        else if (pt == pickupType.gem)
+        {
+            GameManager.instance.IncrementGemCount();
         }
 
-        if (pt == pickupType.gem)
-        {
-            if (collision.gameObject.tag == "Player")
-            {
-                GameManager.instance.IncrementGemCount();
-            
-                Instantiate(PickupEffect, transform.position, Quaternion.identity);
+        // play sound if AudioSource exists
+        PlayPickupSound();
 
-                Destroy(this.gameObject, 0.2f);
+        Instantiate(PickupEffect, transform.position, Quaternion.identity);
 
-            }
+        Destroy(gameObject, 0.15f);
+    }
 
-        }
+    private void PlayPickupSound()
+    {
+        if (audioSource == null) return;
+
+        // detach so destroy doesn't kill sound
+        audioSource.transform.SetParent(null);
+
+        audioSource.Play();
+
+        // destroy audio object after clip finishes
+        Destroy(audioSource.gameObject, audioSource.clip.length);
     }
 }

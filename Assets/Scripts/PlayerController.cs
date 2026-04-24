@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f; // resume game
+
         rb = GetComponent<Rigidbody2D>();
         footEmissions = footsteps.emission;
 
