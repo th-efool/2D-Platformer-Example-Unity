@@ -8,7 +8,7 @@ public enum Controls { mobile,pc}
 
 public class PlayerController : MonoBehaviour
 {
-
+    public AudioSource jumpAudio;
     public GameObject PauseScreen;
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
@@ -194,6 +194,11 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // Zero out vertical velocity
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         playeranim.SetTrigger("jump");
+        
+        if (jumpAudio != null)
+        {
+            jumpAudio.PlayOneShot(jumpAudio.clip);
+        }
     }
 
     private bool IsGrounded()

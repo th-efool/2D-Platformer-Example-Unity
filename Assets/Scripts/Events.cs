@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,21 +9,24 @@ public class Events : MonoBehaviour
     [SerializeField] public int SceneIndex;
     public void Menu()
     {
-        SceneManager.LoadScene(0);
+        StartCoroutine(LoadWithDelay(0));
     }
+
     public void Level()
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(LoadWithDelay(1));
     }
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene((SceneIndex+1)%4);
+        StartCoroutine(LoadWithDelay((SceneIndex + 1) % 4));
     }
+
     public void LoadLevelIndex(int i)
     {
-        SceneManager.LoadScene(i);
+        StartCoroutine(LoadWithDelay(i));
     }
+
     public void Quit()
     {
 #if UNITY_EDITOR
@@ -30,5 +34,11 @@ public class Events : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    private IEnumerator LoadWithDelay(int sceneIndex)
+    {
+        yield return new WaitForSecondsRealtime(0.7f); // works even if game is paused
+        SceneManager.LoadScene(sceneIndex);
     }
 }
